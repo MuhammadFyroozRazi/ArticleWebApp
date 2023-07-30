@@ -1,0 +1,29 @@
+@import './variable.module.scss';
+@import './font.scss';
+
+.content-viewer {
+    font-family: $font-family-inter;
+    float: left;
+    color: red;
+    height: 100vh ;
+    max-width: 30%;
+    background-color: $bg-content-viewer;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    // align-items: center;
+    &__h1{
+        margin-bottom: 1ch;
+        letter-spacing: 0.15ch;
+    }
+    &__p{
+        padding: .5ch;
+        text-align: left;
+    }
+    &__br{
+        width: 100%;
+        height: .08ch;
+        margin: .5rem 0 .3rem 0;
+        background-color: $normal-font-clr;
+    }
+}

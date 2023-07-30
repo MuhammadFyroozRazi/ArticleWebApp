@@ -1,0 +1,98 @@
+@import './variable.module.scss';
+.markdown-section{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 60%;
+    max-width: 60%;
+    &__nav{
+        position: fixed;
+        top: 0;
+        width: 60%;
+        max-width: 60%;
+        padding-top: 1rem;
+        background: $bg-color;
+        display: flex;
+        justify-content:space-between;
+        &__btn{
+            padding: 0;
+            letter-spacing: .2ch;
+            span{
+                position: relative;
+                // position: absolute;
+                top: 7%;
+            }
+            padding: 0 .2rem;
+        }
+        .edit-btn{
+            border: 1px solid $normal-font-clr;
+            margin: .2rem;
+            width: 4rem;
+            margin-left: 10rem;
+        }
+    }
+    &__keys{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 5rem;
+
+        div{
+            display: flex;
+            margin-right: 1rem;
+         }
+        button{
+            *{
+                position: relative;
+                top: 3%;
+                left: -15%;
+                // color: blue;
+            }
+            // display: flex;
+            // align-items: center;
+            border: 1px solid black;
+            margin-bottom:.4rem;
+            margin-inline-end:.4rem ;
+            height: 1.5rem;
+            padding-inline: .4rem;
+            aspect-ratio: 1;
+            
+        }
+        &-p{
+            display: flex;
+            align-items: center;
+
+            &-in{
+                background: none;
+                border: 1px solid black;
+                transform: translateY(-3px);
+                width: 1.5rem;
+                height: 1.5rem;
+                margin-inline-end: .4rem;
+                text-align: center;
+            }
+        }
+    }
+    &__content,&__content-edit{
+        margin-top:5rem ;
+        *{
+            margin-bottom: .5rem;
+        }
+        .main-title{
+            margin-bottom: 1rem;
+            text-align: center;
+            text-transform:uppercase;
+            letter-spacing: 0.08ch;
+            font-weight: 700;
+            word-spacing: 1ch;
+        }
+    }
+    // &_content-edit{
+
+    // }
+    &__textarea{
+        border-radius: 5px;
+        padding: 1rem;
+        height: 70%;
+    }
+}

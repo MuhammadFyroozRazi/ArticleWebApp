@@ -1,0 +1,54 @@
+@import './variable.module.scss';
+@import './contentViewer.module.scss';
+@import './markdown.module.scss';
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+button{
+    // background-color: none;
+    background: none;
+    border: 0;
+    padding: .3rem;
+    cursor: pointer;
+}
+.content-create-page{
+    width: 100vw;
+}
+
+select{
+    background: none;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    background-color: $bg-color;
+}
+.title {
+    color: black;
+}
+h1{
+    font-weight: 500;
+}
+h2,h3,h5,h6{
+    font-weight: 400;
+}
+.p-small{
+    // font-weight: 200;
+    font-size: .6rem;
+    font-weight: 400;
+    color: $normal-font-clr;
+    &-fade{
+        opacity: .7;
+    }
+}
+.black-clr{
+    color: $normal-font-clr;
+}
+.content-font{
+    font-weight: 300;
+}
+.content-create-page{
+    display: flex;
+}
