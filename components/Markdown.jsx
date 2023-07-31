@@ -6,14 +6,13 @@ import {PiTextAlignLeftFill,PiTextAlignJustifyFill,PiTextAlignRightFill} from 'r
 import {BiFontColor} from 'react-icons/bi'
 import {IoIosArrowForward,IoIosArrowBack} from 'react-icons/io'
 
-import { useState,useRef, useEffect } from "react"
+import { useState,useRef } from "react"
 
-const Markdown = () => {
+const Markdown = (prop) => {
   const textAreaRef = useRef(null)
 
   const [ text,setText] =useState('')
   const [ fontSz,setFontSz] =useState('0')
-  const [edit,setEdit] = useState(true)
 
 
   const handleTagClick= (tagName) => {
@@ -60,21 +59,16 @@ const Markdown = () => {
     }
 
   }
-
-  const handleEditButton = () =>{
-    const listOfParas = text.split('\n')
-    console.log(listOfParas);
-  }
- if(edit){
+ if(prop.edit){
   return (
     <section className="markdown-section">
-      <nav className="markdown-section__nav">
+      {/* <nav className="markdown-section__nav">
         <button className="markdown-section__nav__btn"><span>{`<`}</span> previous page</button>
         <button className="markdown-section__nav__btn edit-btn" 
           onClick={handleEditButton}
         >{edit === false ? 'edit' : 'done'}</button>
         <button className="markdown-section__nav__btn"> next page<span>{`>`}</span></button>
-      </nav>
+      </nav> */}
         
       <div className="markdown-section__keys">  
         <div className="markdown-section__keys-text-btn">
