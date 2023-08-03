@@ -6,7 +6,8 @@ import { useState } from "react"
 
 const create = () => {
   const [edit,setEdit] = useState(true)
-  const [ text,setText] =useState('')
+  const [text,setText]=useState('')
+
   const handleEditButton = () =>{
     setEdit(pre=>!pre)
   }
@@ -20,7 +21,7 @@ const create = () => {
         <button className="markdown-section__nav__btn"> next page<span>{`>`}</span></button>
       </nav>
       <ContentViewer edit={edit}/>
-      <Markdown edit={edit} setText={setText} text={text}/>
+      <Markdown edit={edit}  text={text} setText={setText} />
     </div>
   )
 }

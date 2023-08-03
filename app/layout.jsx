@@ -1,6 +1,7 @@
 'use client'
 
 import '../styles/global.scss'
+import { ReduxProvider } from '@redux/provider'
 
 const RootLayout = ({children}) => {
   
@@ -11,7 +12,9 @@ const RootLayout = ({children}) => {
           <h1 className='title'></h1>
           
             {/* hello world */}
-            {children}
+            <ReduxProvider>
+              {children}
+            </ReduxProvider>
         </body>
    </html>
   )

@@ -8,10 +8,8 @@ import {IoIosArrowForward,IoIosArrowBack} from 'react-icons/io'
 
 import { useState,useRef } from "react"
 
-const Markdown = (prop) => {
+const Markdown = ({edit,text,setText}) => {
   const textAreaRef = useRef(null)
-
-  const [ text,setText] =useState('')
   const [ fontSz,setFontSz] =useState('0')
 
 
@@ -59,7 +57,7 @@ const Markdown = (prop) => {
     }
 
   }
- if(prop.edit){
+ if(edit){
   return (
     <section className="markdown-section">
       {/* <nav className="markdown-section__nav">
