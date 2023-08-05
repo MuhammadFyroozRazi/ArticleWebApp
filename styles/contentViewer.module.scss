@@ -1,12 +1,14 @@
 @import './variable.module.scss';
 @import './font.scss';
-
+.content-container{
+    width: 100vw;
+    display: flex;
+    overflow-y: hidden;
+}
 .content-viewer {
     font-family: $font-family-inter;
-    float: left;
     color: red;
     height: 100vh ;
-    max-width: 30%;
     background-color: $bg-content-viewer;
     display: flex;
     flex-direction: column;
@@ -26,4 +28,38 @@
         margin: .5rem 0 .3rem 0;
         background-color: $normal-font-clr;
     }
+}
+.article-viewer{
+    width: 100%;
+    margin-block: 2rem;
+    margin-inline:2rem ;
+    overflow-y: auto;
+    height: 80vh;
+    p{
+        margin-top: .3rem;
+        font-size: 12px;
+        #bold{
+            font-weight: 700;
+        }
+        #h1{
+            font-weight: 900;
+        }
+        #h2{
+            font-weight: 900;
+        }
+        #h1{
+            font-weight: 900;
+        }
+        #h1{
+            font-weight: 900;
+        }
+        #code{
+            font-size: .7rem;
+            padding-inline: .3rem;
+            padding-block: .1rem;
+            background: rgba($color: #f3d7d4, $alpha: 0.4);
+            border: 1px solid rgba(239, 4, 4,.5);
+        }
+    }
+
 }

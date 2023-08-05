@@ -3,13 +3,6 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const getDate = () =>{
     const currentDate = new Date()
-    // const year = currentDate.getFullYear()
-    // const day =String(currentDate.getDate()).padStart(2,'0')
-    // const month = String(currentDate.getMonth()).padStart(2,'0')
-    // const hours = String(currentDate.getHours()).padStart(2,'0')
-    // const minutes = String(currentDate.getMinutes()).padStart(2,'0')
-    // const seconds = String(currentDate.getSeconds()).padStart(2,'0')
-    // return `${day}:${month}:${year}//${hours}:${minutes}:${seconds}`
     return `${currentDate.toUTCString()}`
 }
 

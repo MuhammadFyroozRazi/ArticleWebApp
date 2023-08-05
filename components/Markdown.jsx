@@ -10,8 +10,12 @@ import { useState,useRef } from "react"
 
 const Markdown = ({edit,text,setText}) => {
   const textAreaRef = useRef(null)
+  
+  // const [text,setText]=useState('')
   const [ fontSz,setFontSz] =useState('0')
-
+  const handleTextchange = (content)=>{
+    setText(content)
+  }
 
   const handleTagClick= (tagName) => {
     const selectionStart =textAreaRef.current.selectionStart 
@@ -43,31 +47,23 @@ const Markdown = ({edit,text,setText}) => {
           }    
           index=index+1
         }
-        setText(paras.join('\n'))
+        handleTextchange(paras.join('\n'))
       }
       else{
-        setText(document)
+        handleTextchange(document)
       }
     }
     else{
       const paras = text.split('\n')
       const indexOfSelectedPara = text.substring(0,selectionStart).split('\n').length-1
       paras[indexOfSelectedPara]=`<${tagName}>${paras[indexOfSelectedPara]}</${tagName}>`
-      setText(paras.join('\n'))
+      handleTextchange(paras.join('\n'))
     }
 
   }
  if(edit){
   return (
     <section className="markdown-section">
-      {/* <nav className="markdown-section__nav">
-        <button className="markdown-section__nav__btn"><span>{`<`}</span> previous page</button>
-        <button className="markdown-section__nav__btn edit-btn" 
-          onClick={handleEditButton}
-        >{edit === false ? 'edit' : 'done'}</button>
-        <button className="markdown-section__nav__btn"> next page<span>{`>`}</span></button>
-      </nav> */}
-        
       <div className="markdown-section__keys">  
         <div className="markdown-section__keys-text-btn">
           <button  onClick={()=>handleTagClick('h1')}>h1</button>
@@ -93,7 +89,7 @@ const Markdown = ({edit,text,setText}) => {
 
       <textarea ref={textAreaRef} className="markdown-section__textarea" placeholder="text..." type="text" value={text} 
         onChange={(e)=>{
-          setText(e.target.value)
+          handleTextchange(e.target.value)
         }}/>
     </section>
   )}
