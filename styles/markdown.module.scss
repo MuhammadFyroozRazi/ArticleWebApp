@@ -59,6 +59,56 @@
             aspect-ratio: 1;
             
         }
+        .color-picker{
+            
+            height: 1.5rem;
+            width: 1.6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            span{
+                font-size: 90%;
+                transform: translateY(-2px);
+            }
+            border: 1px solid black;
+            &__statusbar{
+                background: red;
+                // border: .5px solid rgba(0, 0, 0, 0.61);
+                height: .1rem;
+                width: 1.2rem;
+            }
+            &-window{   
+                border: 2px solid black;
+                background:$bg-color ;
+                margin: 0;
+                width: .65rem;
+                height: .65rem;
+                transform: translate(-1.5rem,1.0rem);
+                input{
+                    transform: translate(0,-.1rem);
+                    height: 0;
+                    width: 0;
+                    border: none;
+                }
+            }
+        }
+        select{
+            option > *{
+                position: relative;
+                top: 5%;
+                left: -15%;
+                color: red;
+            }
+            // transform: translateY(-1px);
+            transform: translate(-3px,0px);
+            margin-inline: .2rem;
+            height: 1.5rem;
+            border: 1px solid black;
+            :focus,:active,:hover,:visited,:checked{
+            }
+        }
         &-p{
             display: flex;
             align-items: center;

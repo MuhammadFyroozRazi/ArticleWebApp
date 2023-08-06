@@ -3,25 +3,31 @@ import {FaBold} from 'react-icons/fa'
 import {FiCode} from 'react-icons/fi'
 import {GrItalic} from 'react-icons/gr'
 import {PiTextAlignLeftFill,PiTextAlignJustifyFill,PiTextAlignRightFill} from 'react-icons/pi'
-import {BiFontColor} from 'react-icons/bi'
 import {IoIosArrowForward,IoIosArrowBack} from 'react-icons/io'
 
 import { useState,useRef } from "react"
 
 const Markdown = ({edit,text,setText}) => {
   const textAreaRef = useRef(null)
-  
-  // const [text,setText]=useState('')
+
   const [ fontSz,setFontSz] =useState('0')
+  const [color,setColor] = useState('#ffffff')
+
+  console.log('color',color);  
   const handleTextchange = (content)=>{
     setText(content)
   }
 
+
   const handleTagClick= (tagName) => {
+    console.log(tagName);
+    if (tagName === 'select') {
+      return
+    }
     const selectionStart =textAreaRef.current.selectionStart 
     const selectionEnd =textAreaRef.current.selectionEnd 
 
-
+    
     if (selectionStart != selectionEnd) {
       const indexOfSelectedStart = text.substring(0,selectionStart).split('\n').length-1
       const indexOfSelectedEnd = text.substring(0,selectionEnd).split('\n').length-1
@@ -67,10 +73,24 @@ const Markdown = ({edit,text,setText}) => {
       <div className="markdown-section__keys">  
         <div className="markdown-section__keys-text-btn">
           <button  onClick={()=>handleTagClick('h1')}>h1</button>
+          <select type='select' onChange={(e)=>handleTagClick(e.target.value)}>
+            <option >select</option>
+            <option  value="h2">h2</option>
+            <option  value="h3">h3</option>
+            <option  value="h4">h4</option>
+          </select>
           <button  onClick={()=>handleTagClick('b')}><FaBold/></button>
           <button  onClick={()=>handleTagClick('c')}><FiCode/></button>
           <button  onClick={()=>handleTagClick('i')}><GrItalic/></button>
-          <button  onClick={()=>handleTagClick('clr')}><BiFontColor/></button>
+          
+          <div className='color-picker' onClick={()=>handleTagClick(`${color}`)}>
+            <span>A</span>
+            <span className='color-picker__statusbar' style={{background:`${color}`}}></span>
+          </div>
+          <div  className='color-picker-window'>
+            <input value={color} type="color" onChange={(e)=>setColor(e.target.value)} />
+          </div>
+          
         </div>
 
         <div className="markdown-section__keys-content-btn">
@@ -82,7 +102,7 @@ const Markdown = ({edit,text,setText}) => {
         <div className="markdown-section__keys-p">
           <button onClick={()=>setFontSz(pre=>(parseInt(pre)-1).toString())}> <IoIosArrowBack/> </button>
           <input type="text" value={fontSz} className="markdown-section__keys-p-in" 
-          onChange={(e)=> setFontSz(e.target.value.toString())}/>
+          onChange={(e)=> setFontSz(e.target.value.toString())} />
           <button onClick={()=>setFontSz(pre=>(parseInt(pre)+1).toString())}><IoIosArrowForward/> </button>
         </div>
       </div>
