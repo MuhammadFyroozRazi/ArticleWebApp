@@ -1,9 +1,11 @@
 @import './variable.module.scss';
 @import './font.scss';
+
 .content-container{
-    width: 100vw;
+    // width: 100vw;
+
     display: flex;
-    overflow-y: hidden;
+    gap: 4rem;
 }
 .content-viewer {
     font-family: $font-family-inter;
@@ -13,7 +15,21 @@
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    // align-items: center;
+    min-width: 20rem;
+    width: 30vw;
+    // width: clamp(20rem,40vw,30rem);
+    z-index: 1;
+    position: relative;
+    &__toggle{
+        position: absolute;
+        top: 20%;
+        right: -7.5px;
+        width: 15px;
+        height: 80px;
+        border-radius: 10px;
+        border: 2px solid white;
+        background-color:rgba(222, 222, 222, 0.595);
+    }
     &__h1{
         margin-bottom: 1ch;
         letter-spacing: 0.15ch;
@@ -29,29 +45,40 @@
         background-color: $normal-font-clr;
     }
 }
+.translate-to-view{
+}
+.translate-to-hide{
+    // transform: translateX();
+}
 .article-viewer{
     width: 100%;
-    margin-block: 2rem;
-    margin-inline:2rem ;
+    margin-top: 5rem;
+    // margin: auto auto;
     overflow-y: auto;
-    height: 80vh;
+    transition: height 0.3s ease-in-out;
+    
     p{
         margin-top: .3rem;
-        font-size: 12px;
+        font-size: 9px;
+        // padding-left: 2rem;
         #bold{
             font-weight: 700;
         }
         #h1{
+            // padding-left: 0rem;
             font-weight: 900;
         }
         #h2{
+            // padding-left: 0rem;
             font-weight: 900;
         }
-        #h1{
+        #h3{
+            // padding-left: 0rem;
             font-weight: 900;
         }
-        #h1{
+        #h4{
             font-weight: 900;
+            // padding-left: 0rem;
         }
         #code{
             font-size: .7rem;
@@ -63,6 +90,20 @@
         #italic{
             font-style: italic;
         }
+        #aj{
+            display: flex;
+            align-items: center;
+        }
     }
+
+}
+.full-size{
+    height: 80vh;
+    margin-inline:3rem ;
+}
+.half-size{
+    height: 55vh;
+    width: 90vw;
+    margin-inline:4rem ;
 
 }

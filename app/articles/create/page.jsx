@@ -11,7 +11,7 @@ const create = () => {
   const [edit,setEdit] = useState(false)
   const [text,setText]=useState('')
   
-  console.log(text);
+  // console.log(text);
   const dispatch = useDispatch()
   const handleEditButton =  () =>{
     setEdit(pre=>!pre)
@@ -29,18 +29,17 @@ const create = () => {
 
   return (
     <div className="content-create-page"> 
-      <nav className="markdown-section__nav">
-        <button className="markdown-section__nav__btn"><span>{`<`}</span> previous page</button>
-        <button className="markdown-section__nav__btn edit-btn" 
+      <nav className="content-create-page__nav">
+        {/* <button className="content-create-page__nav__btn"><span>{`<`}</span> previous page</button> */}
+        <button className="content-create-page__nav__btn edit-btn" 
           onClick={handleEditButton}
         >{edit === false ? 'edit' : 'done'}</button>
-        <button className="markdown-section__nav__btn"> next page<span>{`>`}</span></button>
+        {/* <button className="content-create-page__nav__btn"> next page<span>{`>`}</span></button> */}
       </nav>
       <ContentViewer edit={edit}  text={text}/>
       <Markdown edit={edit} 
       // handleTextchange={handleTextchange} 
-      text={text} setText={setText}
-
+        text={text} setText={setText}
        />
     </div>
   )

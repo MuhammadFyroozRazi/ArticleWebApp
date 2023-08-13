@@ -1,37 +1,10 @@
 @import './variable.module.scss';
+
 .markdown-section{
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 80%;
-    &__nav{
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        width: 25rem;
-        min-width:60% ;
-        // max-width: 60%;
-        padding-top: 1rem;
-        background: $bg-color;
-        display: flex;
-        justify-content:space-between;
-        &__btn{
-            padding: 0;
-            letter-spacing: .2ch;
-            span{
-                position: relative;
-                // position: absolute;
-                top: 7%;
-            }
-            padding: 0 .2rem;
-        }
-        .edit-btn{
-            border: 1px solid $normal-font-clr;
-            margin: .2rem;
-            width: 4rem;
-            margin-left: 7rem;
-        }
-    }
+    width: 70vw;
+    position: fixed;
+    left: 25%;
+    bottom: 2rem;
     &__keys{
         display: flex;
         align-items: center;
@@ -87,10 +60,18 @@
                 height: .65rem;
                 transform: translate(-1.5rem,1.0rem);
                 input{
-                    transform: translate(0,-.1rem);
-                    height: 0;
-                    width: 0;
-                    border: none;
+                    // transform: translate(0,-.1rem);
+                    height: .5rem;
+                    width: 1rem;
+                    position: relative;
+                    &::before{
+                        position: absolute;
+                        content: '';
+                        height: 7px;
+                        left: -.03rem;
+                        aspect-ratio: 1;
+                        background: $bg-color;
+                    }
                 }
             }
         }
@@ -106,8 +87,8 @@
             margin-inline: .2rem;
             height: 1.5rem;
             border: 1px solid black;
-            :focus,:active,:hover,:visited,:checked{
-            }
+            // :focus,:active,:hover,:visited,:checked{
+            // }
         }
         &-p{
             display: flex;
@@ -142,8 +123,13 @@
 
     // }
     &__textarea{
+        margin-inline: auto;
         border-radius: 5px;
         padding: 1rem;
-        height: 60vh;
+        height: 20vh;
+        // margin: auto auto;
+        width:100%;
+        max-width: 33rem;
+        // width: clamp(20rem,70vw,40rem);
     }
 }

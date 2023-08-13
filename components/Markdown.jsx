@@ -13,22 +13,21 @@ const Markdown = ({edit,text,setText}) => {
   const [ fontSz,setFontSz] =useState('0')
   const [color,setColor] = useState('#ffffff')
 
-  console.log('color',color);  
   const handleTextchange = (content)=>{
     setText(content)
   }
 
-
+// handling when an tag is clicked 
   const handleTagClick= (tagName) => {
-    console.log(tagName);
+    // on select option do nothing for selecting select option 
     if (tagName === 'select') {
       return
     }
     const selectionStart =textAreaRef.current.selectionStart 
     const selectionEnd =textAreaRef.current.selectionEnd 
-
     
-    if (selectionStart != selectionEnd) {
+    // apply the sentence/text tagging (can tag simple sentence or even an letter). exclude h1-h4 and allign tags from it. 
+    if (selectionStart != selectionEnd && !['h1','h2','h3','h4','ar','al','aj'].includes(tagName) ) {
       const indexOfSelectedStart = text.substring(0,selectionStart).split('\n').length-1
       const indexOfSelectedEnd = text.substring(0,selectionEnd).split('\n').length-1
 
@@ -37,7 +36,6 @@ const Markdown = ({edit,text,setText}) => {
       const textToReplace = `<${tagName}>${text.substring(selectionStart,selectionEnd)}</${tagName}>`
       const document = firstTextPortion+textToReplace+lastTextPortion
       const paras = document.split('\n')
-      console.log(document);
 
       let index = indexOfSelectedStart
       if (indexOfSelectedStart!=indexOfSelectedEnd) {
@@ -59,14 +57,15 @@ const Markdown = ({edit,text,setText}) => {
         handleTextchange(document)
       }
     }
+    // apply taging on the paragrapgh if cursor do not select anything only clicked in an para. its is main for before excluded tags 
     else{
       const paras = text.split('\n')
       const indexOfSelectedPara = text.substring(0,selectionStart).split('\n').length-1
       paras[indexOfSelectedPara]=`<${tagName}>${paras[indexOfSelectedPara]}</${tagName}>`
       handleTextchange(paras.join('\n'))
     }
-
   }
+
  if(edit){
   return (
     <section className="markdown-section">
@@ -95,8 +94,8 @@ const Markdown = ({edit,text,setText}) => {
 
         <div className="markdown-section__keys-content-btn">
           <button  onClick={()=>handleTagClick('aj')}><PiTextAlignJustifyFill /></button>
-          <button  onClick={()=>handleTagClick('ar')}><PiTextAlignLeftFill/></button>
-          <button  onClick={()=>handleTagClick('al')}><PiTextAlignRightFill/></button>
+          <button  onClick={()=>handleTagClick('al')}><PiTextAlignLeftFill/></button>
+          <button  onClick={()=>handleTagClick('ar')}><PiTextAlignRightFill/></button>
         </div>
 
         <div className="markdown-section__keys-p">
