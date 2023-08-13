@@ -1,25 +1,37 @@
 'use client'
 
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 
 const ContentViewer = ({text,edit}) => {
   
   const parser = new DOMParser()
-  const ankerRef = useRef(null)
   const auther = useSelector(state=>state.articleSlice.auther)
   const article = useSelector(state=>state.articleSlice.article)
 
   const [showContentViewer,setShowContentViewer] = useState(false)
   
-  let document =  text.replace(/<(b)>/g,`<span id='bold' `)
+
+  let textDoc =  text.replace(/<(b)>/g,`<span id='bold'>`)
                         .replace(/<(c)>/g,`<span id='code'>`)
                         .replace(/<(i)>/g,`<span id='italic'>`)
                         .replace(/<(clr)>/g,`<span id='color'>`)
-                        .replace(/<(h1)>/g,`<span id='h1 h1${Math.floor(Math.random()*90000)+10000}' style="font-size:2rem;">`)
-                        .replace(/<(h2)>/g,`<span id='h2 h2${Math.floor(Math.random()*90000)+10000}' style="font-size:1.5rem;">`)
-                        .replace(/<(h3)>/g,`<span id='h3 h3${Math.floor(Math.random()*90000)+10000}' style="font-size:1.2rem;">`)
-                        .replace(/<(h4)>/g,`<span id='h4 h4${Math.floor(Math.random()*90000)+10000}' style="font-size:1rem;">`)
+                        .replace(/<(h1)>/g,function(){
+                          const rand = Math.floor(Math.random()*90000)+10000
+                          return `<span id='h1' class='h1${rand}' style="font-size:2rem;">`
+                         }) //here we calling random fuction each time even if h1 appears again previosly it only call once
+                        .replace(/<(h2)>/g,function(){
+                          const rand = Math.floor(Math.random()*90000)+10000
+                          return `<span id='h1' class='h2${rand}' style="font-size:2rem;">`
+                        })
+                        .replace(/<(h3)>/g,function(){
+                          const rand = Math.floor(Math.random()*90000)+10000
+                          return `<span id='h1' class='h3${rand}' style="font-size:2rem;">`
+                        })
+                        .replace(/<(h4)>/g,function(){
+                          const rand = Math.floor(Math.random()*90000)+10000
+                          return `<span id='h1' class='h4${rand}' style="font-size:2rem;">`
+                        })
                         .replace(/<(aj)>/g,`<span id='aj' style="text-align:justify;">`)
                         .replace(/<(ar)>/g,`<span id='ar' style="text-align:right;">`)
                         .replace(/<(al)>/g,`<span id='al' style="text-align:left;">`)
@@ -28,31 +40,32 @@ const ContentViewer = ({text,edit}) => {
   
    
    
-   const paras = document.split('\n')
+   const paras = textDoc.split('\n')
    paras.forEach((element,index) => {
       paras[index]=`<p>`+element+`</p>`
    });
-   document = paras.join('\n')
+   textDoc = paras.join('\n')
 
-   const contentXML = parser.parseFromString(document,'text/html')
+   const contentXML = parser.parseFromString(textDoc,'text/html')
    const contentElements = contentXML.querySelectorAll('p')
    const contentElementsArray = [...contentElements]
 
    const contentComponent = contentElementsArray.map((event,index)=>(
-    <p ref={ankerRef} key={index}style={{fontSize:'0.9rem'}} >
+    <p key={index}style={{fontSize:'0.9rem'}} >
       <div dangerouslySetInnerHTML={{ __html: event.innerHTML }} />
-       {/* {event.innerHTML} */}
     </p>
    ))
 
    
 
 
-   const headers = paras.filter(para=>/<span id='h[1-4] h[1-4][0-9]{5}'.*>/.test(para))
+   const headers = paras.filter(para=>/<span id='h[1-4]'.*>/.test(para))
    headers.forEach((header,index)=>{
-    const removeP = header.split(/<p>/)[1].split('</p>')[0].split('</span>')
-    const ankerId = removeP[0].split(/\s+/)[2].split('\'')[0]
-    const removeSpan = removeP[0].split(/<span id='h[1-4] .*?>/)[1]
+    const removeP = header.split(/<p>/)[1].split('</p>')[0].split('</span>') 
+    // console.log(removeP[0].split(/\s+/)[2].split('class=')[1].split('\'')[1]);
+    const ankerId = removeP[0].split(/\s+/)[2].split('class=')[1].split('\'')[1]
+    // console.log(removeP[0].split(/<.*>/)[1]);
+    const removeSpan = removeP[0].split(/<.*>/)[1]
     headers[index]=`<a href=#${ankerId} >${removeSpan}</a>`
    })
    const headersView = headers.join('\n')
@@ -61,15 +74,21 @@ const ContentViewer = ({text,edit}) => {
    const ankerElement = headerXml.querySelectorAll('a');
    const ankerElementArray = [...ankerElement]
   
-
-   const handleHeaderLinkClick = (e) =>{
-    // console.log( e.target.getAttribute('href'))
-    // const targetElement = document.getElementById(e.target.getAttribute('href'))
-    // console.log(targetElement);
+  
+   const handleHeaderLinkClick = (e,targetid) =>{
+    // on clicking the ankers this will happens
+    // console.log(targetid.split('#')[1]);
+    e.preventDefault()
+    const target= targetid.split('#')[1]
+    const targetSelection = document.querySelector(`.${target}`)
+    console.log(targetSelection);
+    if(targetSelection){
+      targetSelection.scrollIntoView({behavior:'smooth'})
+    }
    }
   
    const anchorComponet = ankerElementArray.map((event,index)=>(
-    <a key={index} onClick={handleHeaderLinkClick} href={event.getAttribute('href')}>
+    <a key={index} onClick={(e)=>handleHeaderLinkClick(e,event.getAttribute('href'))} href={event.getAttribute('href')}>
       {event.innerText}
     </a>
    ))
