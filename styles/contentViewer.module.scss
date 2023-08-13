@@ -20,6 +20,7 @@
     // width: clamp(20rem,40vw,30rem);
     z-index: 1;
     position: relative;
+    overflow-y: auto;
     &__toggle{
         position: absolute;
         top: 20%;
@@ -44,6 +45,9 @@
         margin: .5rem 0 .3rem 0;
         background-color: $normal-font-clr;
     }
+    div a{
+        display: block;
+    }
 }
 .translate-to-view{
 }
@@ -51,7 +55,6 @@
     // transform: translateX();
 }
 .article-viewer{
-    width: 100%;
     margin-top: 5rem;
     // margin: auto auto;
     overflow-y: auto;
@@ -99,6 +102,7 @@
 }
 .full-size{
     height: 80vh;
+    width: 55vw;
     margin-inline:3rem ;
 }
 .half-size{

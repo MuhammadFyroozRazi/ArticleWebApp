@@ -8,16 +8,6 @@
         top: .5rem;
         right: 2rem;
         width: 25rem;
-        &__btn{
-            padding: 0;
-            letter-spacing: .2ch;
-            span{
-                position: relative;
-                // position: absolute;
-                top: 7%;
-            }
-            padding: 0 .2rem;
-        }
         .edit-btn{
             border: 1px solid $normal-font-clr;
             margin: .2rem;

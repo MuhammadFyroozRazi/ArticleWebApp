@@ -1,15 +1,16 @@
 'use client'
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useSelector } from "react-redux"
 
 const ContentViewer = ({text,edit}) => {
-
+  
+  const parser = new DOMParser()
+  const ankerRef = useRef(null)
   const auther = useSelector(state=>state.articleSlice.auther)
   const article = useSelector(state=>state.articleSlice.article)
 
   const [showContentViewer,setShowContentViewer] = useState(false)
-  // console.log(showContentViewer);
   
   let document =  text.replace(/<(b)>/g,`<span id='bold' `)
                         .replace(/<(c)>/g,`<span id='code'>`)
@@ -29,21 +30,49 @@ const ContentViewer = ({text,edit}) => {
    
    const paras = document.split('\n')
    paras.forEach((element,index) => {
-      paras[index]=`<p style="font-size:.9rem;">`+element+`</p>`
+      paras[index]=`<p>`+element+`</p>`
    });
    document = paras.join('\n')
 
-   const headers = paras.filter(para=>/<span id='h[1-4] h[1-4][0-9]{5}'.*>/.test(para))
-  //  !edit && console.log(headers);
-   headers.forEach((header,index)=>{
-    const removeP = header.split(/<p style=.*?>/)[1].split('</p>')[0].split('</span>')
-    const ankerId = removeP[0].split(/\s+/)[2]
-    console.log(ankerId);
-    const removeSpan = removeP[0].split(/<span id='h[1-4] .*?>/)[1]
-    headers[index]=`<a id='point_to_header' href=#${ankerId}>${removeSpan}</a>`
-   })
-   !edit && console.log(headers);
+   const contentXML = parser.parseFromString(document,'text/html')
+   const contentElements = contentXML.querySelectorAll('p')
+   const contentElementsArray = [...contentElements]
+
+   const contentComponent = contentElementsArray.map((event,index)=>(
+    <p ref={ankerRef} key={index}style={{fontSize:'0.9rem'}} >
+      <div dangerouslySetInnerHTML={{ __html: event.innerHTML }} />
+       {/* {event.innerHTML} */}
+    </p>
+   ))
+
    
+
+
+   const headers = paras.filter(para=>/<span id='h[1-4] h[1-4][0-9]{5}'.*>/.test(para))
+   headers.forEach((header,index)=>{
+    const removeP = header.split(/<p>/)[1].split('</p>')[0].split('</span>')
+    const ankerId = removeP[0].split(/\s+/)[2].split('\'')[0]
+    const removeSpan = removeP[0].split(/<span id='h[1-4] .*?>/)[1]
+    headers[index]=`<a href=#${ankerId} >${removeSpan}</a>`
+   })
+   const headersView = headers.join('\n')
+   
+   const headerXml = parser.parseFromString(headersView,'text/html')
+   const ankerElement = headerXml.querySelectorAll('a');
+   const ankerElementArray = [...ankerElement]
+  
+
+   const handleHeaderLinkClick = (e) =>{
+    // console.log( e.target.getAttribute('href'))
+    // const targetElement = document.getElementById(e.target.getAttribute('href'))
+    // console.log(targetElement);
+   }
+  
+   const anchorComponet = ankerElementArray.map((event,index)=>(
+    <a key={index} onClick={handleHeaderLinkClick} href={event.getAttribute('href')}>
+      {event.innerText}
+    </a>
+   ))
   
   return (
     <div className={`content-container ${showContentViewer ? `translate-to-view` : 'translate-to-hide' } `}>
@@ -53,11 +82,14 @@ const ContentViewer = ({text,edit}) => {
           <p className="content-viewer__p p-small p-small-fade black-clr">creted date : dd/mm/yyy</p>
           <p className="content-viewer__p p-small p-small-fade black-clr">last updated date : dd/mm/yyy</p>
           <div  className="content-viewer__br ">
-            {/* <div dangerouslySetInnerHTML={{ __html: headersView }} /> */}
           </div>
+          {/* <div> */}
+            {anchorComponet}
+          {/* </div> */}
       </section>}
       <section className={`article-viewer ${edit ? `half-size` : `full-size`}`}>
-        <div dangerouslySetInnerHTML={{ __html: document }} />
+        {/* <div dangerouslySetInnerHTML={{ __html: contentComponent }} /> */}
+        {contentComponent}
       </section>
     </div>
   )
