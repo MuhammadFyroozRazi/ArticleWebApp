@@ -7,11 +7,22 @@ import {IoIosArrowForward,IoIosArrowBack} from 'react-icons/io'
 
 import { useState,useRef } from "react"
 
-const Markdown = ({edit,text,setText}) => {
+const Markdown = ({edit,text,setText,fontSz,setFontSz}) => {
   const textAreaRef = useRef(null)
 
-  const [ fontSz,setFontSz] =useState('0')
+  // const [ fontSz,setFontSz] =useState('12')
   const [color,setColor] = useState('#ffffff')
+
+  const baseFontdecrementor = () =>{
+    if (fontSz > 1) {
+      setFontSz(pre=>(parseInt(pre)-1).toString())
+    }
+  }
+  const baseFontSizeChanger = (e) => {
+    if(e.target.value > 0){
+      setFontSz(e.target.value.toString())
+    }
+  }
 
   const handleTextchange = (content)=>{
     setText(content)
@@ -99,9 +110,11 @@ const Markdown = ({edit,text,setText}) => {
         </div>
 
         <div className="markdown-section__keys-p">
-          <button onClick={()=>setFontSz(pre=>(parseInt(pre)-1).toString())}> <IoIosArrowBack/> </button>
+          <button onClick={baseFontdecrementor}> <IoIosArrowBack/> </button>
+          
           <input type="text" value={fontSz} className="markdown-section__keys-p-in" 
-          onChange={(e)=> setFontSz(e.target.value.toString())} />
+          onChange={(e)=> baseFontSizeChanger(e)} />
+          
           <button onClick={()=>setFontSz(pre=>(parseInt(pre)+1).toString())}><IoIosArrowForward/> </button>
         </div>
       </div>

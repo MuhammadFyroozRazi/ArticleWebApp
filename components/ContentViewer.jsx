@@ -18,19 +18,19 @@ const ContentViewer = ({text,edit}) => {
                         .replace(/<(clr)>/g,`<span id='color'>`)
                         .replace(/<(h1)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h1' class='h1${rand}' style="font-size:2rem;">`
+                          return `<span id='h1' class='h1${rand}' style="font-size:2.3rem;">`
                          }) //here we calling random fuction each time even if h1 appears again previosly it only call once
                         .replace(/<(h2)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h1' class='h2${rand}' style="font-size:2rem;">`
+                          return `<span id='h2' class='h2${rand}' style="font-size:1.8rem;">`
                         })
                         .replace(/<(h3)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h1' class='h3${rand}' style="font-size:2rem;">`
+                          return `<span id='h3' class='h3${rand}' style="font-size:1.4rem;">`
                         })
                         .replace(/<(h4)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h1' class='h4${rand}' style="font-size:2rem;">`
+                          return `<span id='h4' class='h4${rand}' style="font-size:.9rem;">`
                         })
                         .replace(/<(aj)>/g,`<span id='aj' style="text-align:justify;">`)
                         .replace(/<(ar)>/g,`<span id='ar' style="text-align:right;">`)
@@ -81,15 +81,16 @@ const ContentViewer = ({text,edit}) => {
     e.preventDefault()
     const target= targetid.split('#')[1]
     const targetSelection = document.querySelector(`.${target}`)
-    console.log(targetSelection);
+    // console.log(targetSelection);
     if(targetSelection){
       targetSelection.scrollIntoView({behavior:'smooth'})
     }
    }
   
    const anchorComponet = ankerElementArray.map((event,index)=>(
-    <a key={index} onClick={(e)=>handleHeaderLinkClick(e,event.getAttribute('href'))} href={event.getAttribute('href')}>
+    <a key={index} className={event.getAttribute('href').includes('h1') ? `h1`:event.getAttribute('href').includes('h2') ? 'h2' : event.getAttribute('href').includes('h3') ? 'h3' : 'h4'} onClick={(e)=>handleHeaderLinkClick(e,event.getAttribute('href'))} href={event.getAttribute('href') }>
       {event.innerText}
+      {console.log(event.getAttribute('href').includes('h1'))}
     </a>
    ))
   
@@ -97,11 +98,12 @@ const ContentViewer = ({text,edit}) => {
     <div className={`content-container ${showContentViewer ? `translate-to-view` : 'translate-to-hide' } `}>
      {!edit && <section className='content-viewer content-font'>
           <button className="content-viewer__toggle" onClick={()=>{setShowContentViewer(pre=>!pre)}}></button>
-          <h1 className="content-viewer__h1 black-clr">Article's Name</h1>
-          <p className="content-viewer__p p-small p-small-fade black-clr">creted date : dd/mm/yyy</p>
-          <p className="content-viewer__p p-small p-small-fade black-clr">last updated date : dd/mm/yyy</p>
-          <div  className="content-viewer__br ">
-          </div>
+          <section className="content-viewer__header">
+            <h1 className="content-viewer__header-h1 black-clr">Article's Name</h1>
+            <p className="content-viewer__header-p p-small p-small-fade black-clr">creted date : dd/mm/yyy</p>
+            <p className="content-viewer__heade-p p-small p-small-fade black-clr">last updated date : dd/mm/yyy</p>
+            <div  className="content-viewer__header-br "></div>
+          </section>
           {/* <div> */}
             {anchorComponet}
           {/* </div> */}

@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux"
 const create = () => {
   const [edit,setEdit] = useState(false)
   const [text,setText]=useState('')
+  const [fontSz,setFontSz] = useState('12')
   
   // console.log(text);
   const dispatch = useDispatch()
@@ -39,7 +40,7 @@ const create = () => {
       <ContentViewer edit={edit}  text={text}/>
       <Markdown edit={edit} 
       // handleTextchange={handleTextchange} 
-        text={text} setText={setText}
+        text={text} setText={setText} fontSz={fontSz} setFontSz={setFontSz}
        />
     </div>
   )

@@ -2,8 +2,6 @@
 @import './font.scss';
 
 .content-container{
-    // width: 100vw;
-
     display: flex;
     gap: 4rem;
 }
@@ -21,6 +19,7 @@
     z-index: 1;
     position: relative;
     overflow-y: auto;
+    // padding-bottom: 2rem;
     &__toggle{
         position: absolute;
         top: 20%;
@@ -31,22 +30,57 @@
         border: 2px solid white;
         background-color:rgba(222, 222, 222, 0.595);
     }
-    &__h1{
-        margin-bottom: 1ch;
-        letter-spacing: 0.15ch;
+    &__header{
+        margin-bottom: 1rem;
+
+        &-h1{
+            font-size: 1rem;
+            margin-bottom: 1ch;
+            letter-spacing: 0.15ch;
+        }
+        &-p{
+            padding: .5ch;
+            text-align: left;
+        }
+        &-br{
+            width: 100%;
+            height: .09ch;
+            // margin-bottom: 1rem;
+            margin: .5rem 0 .3rem 0;
+            background-color: $normal-font-clr;
+        }
     }
-    &__p{
-        padding: .5ch;
-        text-align: left;
-    }
-    &__br{
-        width: 100%;
-        height: .08ch;
-        margin: .5rem 0 .3rem 0;
-        background-color: $normal-font-clr;
-    }
-    div a{
+    a{
         display: block;
+        margin-bottom: 1rem;
+        text-decoration: none;
+        font-size: .9rem;
+        color: black;
+    }
+    .h1{
+        font-weight: 600;
+    }
+    .h2{
+        margin-left: .4rem;
+        position: relative;
+        font-weight: 500;
+        :before{
+            content: '';
+            top: 0;
+            left: 0;
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            background: red;
+        }
+    }
+    .h3{
+        margin-left: .6rem;
+        font-weight: 400;
+    }
+    .h4{
+        margin-left: .9rem;
+        font-weight: 300;
     }
 }
 .translate-to-view{
