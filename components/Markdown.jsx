@@ -72,7 +72,11 @@ const Markdown = ({edit,text,setText,fontSz,setFontSz}) => {
     else{
       const paras = text.split('\n')
       const indexOfSelectedPara = text.substring(0,selectionStart).split('\n').length-1
-      paras[indexOfSelectedPara]=`<${tagName}>${paras[indexOfSelectedPara]}</${tagName}>`
+      // console.log(paras[indexOfSelectedPara].includes('<h1>') && paras[indexOfSelectedPara].includes('<h2>') || paras[indexOfSelectedPara].includes('<h3>')  || paras[indexOfSelectedPara].includes('<h4>') );
+      if(paras[indexOfSelectedPara].includes('<h1>')==false && paras[indexOfSelectedPara].includes('<h2>')==false && paras[indexOfSelectedPara].includes('<h3>') ==false  && paras[indexOfSelectedPara].includes('<h4>')== false){
+        // console.log('can add tags');
+        paras[indexOfSelectedPara]=`<${tagName}>${paras[indexOfSelectedPara]}</${tagName}>`
+      }
       handleTextchange(paras.join('\n'))
     }
   }

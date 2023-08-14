@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
 
-const ContentViewer = ({text,edit}) => {
+const ContentViewer = ({text,edit,fontSz}) => {
   
   const parser = new DOMParser()
   const auther = useSelector(state=>state.articleSlice.auther)
@@ -18,19 +18,19 @@ const ContentViewer = ({text,edit}) => {
                         .replace(/<(clr)>/g,`<span id='color'>`)
                         .replace(/<(h1)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h1' class='h1${rand}' style="font-size:2.3rem;">`
+                          return `<span id='h1' class='h1${rand}' style="font-size:2.3em;">`
                          }) //here we calling random fuction each time even if h1 appears again previosly it only call once
                         .replace(/<(h2)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h2' class='h2${rand}' style="font-size:1.8rem;">`
+                          return `<span id='h2' class='h2${rand}' style="font-size:1.8em;">`
                         })
                         .replace(/<(h3)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h3' class='h3${rand}' style="font-size:1.4rem;">`
+                          return `<span id='h3' class='h3${rand}' style="font-size:1.4em;">`
                         })
                         .replace(/<(h4)>/g,function(){
                           const rand = Math.floor(Math.random()*90000)+10000
-                          return `<span id='h4' class='h4${rand}' style="font-size:.9rem;">`
+                          return `<span id='h4' class='h4${rand}' style="font-size:.9em;">`
                         })
                         .replace(/<(aj)>/g,`<span id='aj' style="text-align:justify;">`)
                         .replace(/<(ar)>/g,`<span id='ar' style="text-align:right;">`)
@@ -38,10 +38,12 @@ const ContentViewer = ({text,edit}) => {
                         .replace(/<#([0-9A-Fa-f]{6})>/g,(_,color)=>`<span id='color' style="color:#${color};">`)
                         .replace(/<\/(b|c|i|clr|h1|h2|h3|h4|aj|ar|al|#([0-9A-Fa-f]))>/g,`</span>`)
   
+  // console.log(fontSz);
    
    
    const paras = textDoc.split('\n')
    paras.forEach((element,index) => {
+    // console.log(element);
       paras[index]=`<p>`+element+`</p>`
    });
    textDoc = paras.join('\n')
@@ -51,21 +53,22 @@ const ContentViewer = ({text,edit}) => {
    const contentElementsArray = [...contentElements]
 
    const contentComponent = contentElementsArray.map((event,index)=>(
-    <p key={index}style={{fontSize:'0.9rem'}} >
+    <p key={index}style={{fontSize:`${fontSz}px`}} >
       <div dangerouslySetInnerHTML={{ __html: event.innerHTML }} />
     </p>
    ))
 
-   
+  
 
 
    const headers = paras.filter(para=>/<span id='h[1-4]'.*>/.test(para))
    headers.forEach((header,index)=>{
-    const removeP = header.split(/<p>/)[1].split('</p>')[0].split('</span>') 
-    // console.log(removeP[0].split(/\s+/)[2].split('class=')[1].split('\'')[1]);
+    // the below shown instruction are mainly for fetching the anker id 
+    const removeP = header.split(/<p>/)[1].split('</p>')[0].split('</span>')
     const ankerId = removeP[0].split(/\s+/)[2].split('class=')[1].split('\'')[1]
-    // console.log(removeP[0].split(/<.*>/)[1]);
+    // console.log(removeP[0].split('>'));
     const removeSpan = removeP[0].split(/<.*>/)[1]
+    // console.log(ankerId);
     headers[index]=`<a href=#${ankerId} >${removeSpan}</a>`
    })
    const headersView = headers.join('\n')
@@ -90,7 +93,7 @@ const ContentViewer = ({text,edit}) => {
    const anchorComponet = ankerElementArray.map((event,index)=>(
     <a key={index} className={event.getAttribute('href').includes('h1') ? `h1`:event.getAttribute('href').includes('h2') ? 'h2' : event.getAttribute('href').includes('h3') ? 'h3' : 'h4'} onClick={(e)=>handleHeaderLinkClick(e,event.getAttribute('href'))} href={event.getAttribute('href') }>
       {event.innerText}
-      {console.log(event.getAttribute('href').includes('h1'))}
+      {/* {console.log(event.getAttribute('href').includes('h1'))} */}
     </a>
    ))
   

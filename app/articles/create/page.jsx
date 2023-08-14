@@ -37,7 +37,7 @@ const create = () => {
         >{edit === false ? 'edit' : 'done'}</button>
         {/* <button className="content-create-page__nav__btn"> next page<span>{`>`}</span></button> */}
       </nav>
-      <ContentViewer edit={edit}  text={text}/>
+      <ContentViewer edit={edit}  text={text} fontSz={fontSz}/>
       <Markdown edit={edit} 
       // handleTextchange={handleTextchange} 
         text={text} setText={setText} fontSz={fontSz} setFontSz={setFontSz}
