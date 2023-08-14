@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
 
-const ContentViewer = ({text,edit,fontSz}) => {
+const ContentViewer = ({text,edit,fontSz,title}) => {
   
   const parser = new DOMParser()
   const auther = useSelector(state=>state.articleSlice.auther)
@@ -32,9 +32,9 @@ const ContentViewer = ({text,edit,fontSz}) => {
                           const rand = Math.floor(Math.random()*90000)+10000
                           return `<span id='h4' class='h4${rand}' style="font-size:.9em;">`
                         })
-                        .replace(/<(aj)>/g,`<span id='aj' >`)
-                        .replace(/<(ar)>/g,`<span id='ar' >`)
-                        .replace(/<(al)>/g,`<span id='al' >`)
+                        // .replace(/<(aj)>/g,`<span id='aj' >`)
+                        // .replace(/<(ar)>/g,`<span id='ar' >`)
+                        // .replace(/<(al)>/g,`<span id='al' >`)
                         .replace(/<#([0-9A-Fa-f]{6})>/g,(_,color)=>`<span id='color' style="color:#${color};">`)
                         .replace(/<\/(b|c|i|clr|h1|h2|h3|h4|aj|ar|al|#([0-9A-Fa-f]{6}))>/g,`</span>`)
   
@@ -102,7 +102,7 @@ const ContentViewer = ({text,edit,fontSz}) => {
      {!edit && <section className='content-viewer content-font'>
           <button className="content-viewer__toggle" onClick={()=>{setShowContentViewer(pre=>!pre)}}></button>
           <section className="content-viewer__header">
-            <h1 className="content-viewer__header-h1 black-clr">Article's Name</h1>
+            <h1 className="content-viewer__header-h1 black-clr">{title ? title : 'Article\'s Name'}</h1>
             <p className="content-viewer__header-p p-small p-small-fade black-clr">creted date : dd/mm/yyy</p>
             <p className="content-viewer__heade-p p-small p-small-fade black-clr">last updated date : dd/mm/yyy</p>
             <div  className="content-viewer__header-br "></div>

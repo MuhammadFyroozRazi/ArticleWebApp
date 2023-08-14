@@ -2,16 +2,23 @@
 import {FaBold} from 'react-icons/fa'
 import {FiCode} from 'react-icons/fi'
 import {GrItalic} from 'react-icons/gr'
-import {PiTextAlignLeftFill,PiTextAlignJustifyFill,PiTextAlignRightFill} from 'react-icons/pi'
+// import {PiTextAlignLeftFill,PiTextAlignJustifyFill,PiTextAlignRightFill} from 'react-icons/pi'
 import {IoIosArrowForward,IoIosArrowBack} from 'react-icons/io'
 
 import { useState,useRef } from "react"
 
-const Markdown = ({edit,text,setText,fontSz,setFontSz}) => {
+const Markdown = ({edit,text,setText,fontSz,setFontSz,title,setTitle}) => {
   const textAreaRef = useRef(null)
 
   // const [ fontSz,setFontSz] =useState('12')
   const [color,setColor] = useState('#ffffff')
+  const [titleToggler,setTitleToggler] = useState(false)
+
+  console.log(title);
+
+  const handleTitleToggler = () =>{
+    setTitleToggler(prev=>!prev)
+  }
 
   const baseFontdecrementor = () =>{
     if (fontSz > 1) {
@@ -85,7 +92,10 @@ const Markdown = ({edit,text,setText,fontSz,setFontSz}) => {
   return (
     <section className="markdown-section">
       <div className="markdown-section__keys">  
-        <div className="markdown-section__keys-text-btn">
+
+        <button className='markdown-section__keys-title' onClick={handleTitleToggler}>T</button>
+
+        {!titleToggler && <div className="markdown-section__keys-text-btn">
           <button  onClick={()=>handleTagClick('h1')}>h1</button>
           <select type='select' onChange={(e)=>handleTagClick(e.target.value)}>
             <option >select</option>
@@ -104,25 +114,29 @@ const Markdown = ({edit,text,setText,fontSz,setFontSz}) => {
           <div  className='color-picker-window'>
             <input value={color} type="color" onChange={(e)=>setColor(e.target.value)} />
           </div>
-          
-        </div>
+        </div>}
 
-        <div className="markdown-section__keys-content-btn">
+        {/* <div className="markdown-section__keys-content-btn">
           <button  onClick={()=>handleTagClick('aj')}><PiTextAlignJustifyFill /></button>
           <button  onClick={()=>handleTagClick('al')}><PiTextAlignLeftFill/></button>
           <button  onClick={()=>handleTagClick('ar')}><PiTextAlignRightFill/></button>
-        </div>
+        </div> */}
 
-        <div className="markdown-section__keys-p">
+        {!titleToggler && <div className="markdown-section__keys-p">
           <button onClick={baseFontdecrementor}> <IoIosArrowBack/> </button>
           
           <input type="text" value={fontSz} className="markdown-section__keys-p-in" 
           onChange={(e)=> baseFontSizeChanger(e)} />
           
           <button onClick={()=>setFontSz(pre=>(parseInt(pre)+1).toString())}><IoIosArrowForward/> </button>
-        </div>
-      </div>
+        </div>}
 
+        {titleToggler && <input className='markdown-section__title' type="text"  placeholder='titile...' value={title} 
+        onChange={(e)=>{
+          setTitle(e.target.value)
+          }} />}
+
+      </div>
       <textarea ref={textAreaRef} className="markdown-section__textarea" placeholder="text..." type="text" value={text} 
         onChange={(e)=>{
           handleTextchange(e.target.value)

@@ -105,6 +105,14 @@
             }
         }
     }
+    &__title{
+        width: 50vw;
+        height: 1.5rem;
+        transform: translateY(-3px);
+        background: none;
+        border: 1px solid black;
+        padding-inline: .3rem;
+    }
     &__content,&__content-edit{
         margin-top:5rem ;
         *{
