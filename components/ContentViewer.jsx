@@ -32,11 +32,11 @@ const ContentViewer = ({text,edit,fontSz}) => {
                           const rand = Math.floor(Math.random()*90000)+10000
                           return `<span id='h4' class='h4${rand}' style="font-size:.9em;">`
                         })
-                        .replace(/<(aj)>/g,`<span id='aj' style="text-align:justify;">`)
-                        .replace(/<(ar)>/g,`<span id='ar' style="text-align:right;">`)
-                        .replace(/<(al)>/g,`<span id='al' style="text-align:left;">`)
+                        .replace(/<(aj)>/g,`<span id='aj' >`)
+                        .replace(/<(ar)>/g,`<span id='ar' >`)
+                        .replace(/<(al)>/g,`<span id='al' >`)
                         .replace(/<#([0-9A-Fa-f]{6})>/g,(_,color)=>`<span id='color' style="color:#${color};">`)
-                        .replace(/<\/(b|c|i|clr|h1|h2|h3|h4|aj|ar|al|#([0-9A-Fa-f]))>/g,`</span>`)
+                        .replace(/<\/(b|c|i|clr|h1|h2|h3|h4|aj|ar|al|#([0-9A-Fa-f]{6}))>/g,`</span>`)
   
   // console.log(fontSz);
    
