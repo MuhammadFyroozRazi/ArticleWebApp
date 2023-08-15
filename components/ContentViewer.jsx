@@ -1,14 +1,26 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
 const ContentViewer = ({text,edit,fontSz,title,windowWidth,showContentViewer}) => {
+
+  const [contentElementsArray,setContentElementsArray] = useState([])
+  const [ankerElementArray,setAnkerElementArray] = useState([])
+
   
+  // useEffect(()=>{
+    
+  // })
   
-  const parser = new DOMParser()
-  const auther = useSelector(state=>state.articleSlice.auther)
-  const article = useSelector(state=>state.articleSlice.article)
+  useEffect(() => {
+    const parser = new window.DOMParser();
+    const contentXML = parser.parseFromString(textDoc,'text/html')
+    const contentElements = contentXML.querySelectorAll('p')
+    setContentElementsArray([...contentElements])
+  }, []);
+  // const auther = useSelector(state=>state.articleSlice.auther)
+  // const article = useSelector(state=>state.articleSlice.article)
   
 
   let textDoc =  text.replace(/<(b)>/g,`<span id='bold'>`)
@@ -47,9 +59,17 @@ const ContentViewer = ({text,edit,fontSz,title,windowWidth,showContentViewer}) =
    });
    textDoc = paras.join('\n')
 
-   const contentXML = parser.parseFromString(textDoc,'text/html')
-   const contentElements = contentXML.querySelectorAll('p')
-   const contentElementsArray = [...contentElements]
+
+   useEffect(() => {
+    const parser = new window.DOMParser();
+    const contentXML = parser.parseFromString(textDoc,'text/html')
+    const contentElements = contentXML.querySelectorAll('p')
+    setContentElementsArray([...contentElements])
+  }, [textDoc]);
+
+  //  const contentXML = parser.parseFromString(textDoc,'text/html')
+  //  const contentElements = contentXML.querySelectorAll('p')
+  //  const contentElementsArray = [...contentElements]
 
    const contentComponent = contentElementsArray.map((event,index)=>(
     <p key={index}style={{fontSize:`${fontSz}px`}} >
@@ -72,9 +92,15 @@ const ContentViewer = ({text,edit,fontSz,title,windowWidth,showContentViewer}) =
    })
    const headersView = headers.join('\n')
    
-   const headerXml = parser.parseFromString(headersView,'text/html')
-   const ankerElement = headerXml.querySelectorAll('a');
-   const ankerElementArray = [...ankerElement]
+   useEffect(() => {
+    const parser = new window.DOMParser();
+    const headerXml = parser.parseFromString(headersView,'text/html')
+    const ankerElement = headerXml.querySelectorAll('a');
+    setAnkerElementArray([...ankerElement])
+  }, [headersView]);
+  //  const headerXml = parser.parseFromString(headersView,'text/html')
+  //  const ankerElement = headerXml.querySelectorAll('a');
+  //  const ankerElementArray = [...ankerElement]
   
   
    const handleHeaderLinkClick = (e,targetid) =>{
