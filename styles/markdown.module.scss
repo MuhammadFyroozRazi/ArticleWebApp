@@ -1,9 +1,9 @@
 @import './variable.module.scss';
 
 .markdown-section{
-    width: 70vw;
+    width: 90vw;
     position: fixed;
-    left: 25%;
+    left: 5%;
     bottom: 2rem;
     &__keys{
         display: flex;
@@ -20,10 +20,7 @@
                 position: relative;
                 top: 3%;
                 left: -15%;
-                // color: blue;
             }
-            // display: flex;
-            // align-items: center;
             border: 1px solid black;
             margin-bottom:.4rem;
             margin-inline-end:.4rem ;
@@ -48,7 +45,6 @@
             border: 1px solid black;
             &__statusbar{
                 background: red;
-                // border: .5px solid rgba(0, 0, 0, 0.61);
                 height: .1rem;
                 width: 1.2rem;
             }
@@ -60,7 +56,6 @@
                 height: .65rem;
                 transform: translate(-1.5rem,1.0rem);
                 input{
-                    // transform: translate(0,-.1rem);
                     height: .5rem;
                     width: 1rem;
                     position: relative;
@@ -87,8 +82,6 @@
             margin-inline: .2rem;
             height: 1.5rem;
             border: 1px solid black;
-            // :focus,:active,:hover,:visited,:checked{
-            // }
         }
         &-p{
             display: flex;
@@ -127,17 +120,11 @@
             word-spacing: 1ch;
         }
     }
-    // &_content-edit{
-
-    // }
     &__textarea{
         margin-inline: auto;
         border-radius: 5px;
         padding: 1rem;
         height: 20vh;
-        // margin: auto auto;
-        width:70vw;
-        // max-width: 38rem;
-        // width: clamp(20rem,70vw,40rem);
+        width:85vw;
     }
 }

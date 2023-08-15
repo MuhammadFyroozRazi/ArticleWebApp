@@ -114,6 +114,8 @@ const ContentViewer = ({text,edit,fontSz,title,windowWidth,showContentViewer}) =
           {/* </div> */}
       </section>}
       <section className={`article-viewer ${edit ? `full-size` : `half-size`}`}>
+        <h1 className="article-header">{title ? title : `Article's Name`}</h1>
+
         {/* <div dangerouslySetInnerHTML={{ __html: contentComponent }} /> */}
         {contentComponent}
       </section>

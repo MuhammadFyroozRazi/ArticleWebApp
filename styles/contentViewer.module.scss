@@ -4,9 +4,6 @@
 .content-container{
     display: flex;
     gap: 4rem;
-    // @include tablet {
-    //     gap: 6rem;
-    // }
 }
 .content-viewer {
     font-family: $font-family-inter;
@@ -18,7 +15,6 @@
     padding: 2rem;
     min-width: 20rem;
     width: 30vw;
-    // width: clamp(20rem,40vw,30rem);
     z-index: 1;
     position: relative;
     overflow-y: auto;
@@ -44,7 +40,6 @@
         &-br{
             width: 100%;
             height: .09ch;
-            // margin-bottom: 1rem;
             margin: .5rem 0 .3rem 0;
             background-color: $normal-font-clr;
         }
@@ -90,32 +85,32 @@
 }
 .article-viewer{
     margin-top: 5rem;
-    // margin: auto auto;
     overflow-y: auto;
     transition: height 0.5s ease-in-out;
-    
+    .article-header{
+        display: flex;
+        justify-content: center;
+        padding-block: .3em;
+        border-bottom:1px solid black ;
+        margin-bottom: .5rem;
+    }
     p{
         margin-top: .3rem;
         font-size: 9px;
-        // padding-left: 2rem;
         #bold{
             font-weight: 700;
         }
         #h1{
-            // padding-left: 0rem;
             font-weight: 900;
         }
         #h2{
-            // padding-left: 0rem;
             font-weight: 900;
         }
         #h3{
-            // padding-left: 0rem;
             font-weight: 900;
         }
         #h4{
             font-weight: 900;
-            // padding-left: 0rem;
         }
         #code{
             font-size: .7rem;
@@ -127,36 +122,34 @@
         #italic{
             font-style: italic;
         }
-        // p > div > aj{
-        //     text-align: center;
-        // }
-        // #al{
-        //     text-align: start;
-        // }
-        // #aj{
-        //     text-align:center;
-        // }
-        // #al{
-        //     text-align:end;
-        // }
+        
     }
-    // @include tablet{
-    //     width: 80vw;
-    // }
-
 }
+
 .half-size{
     height: 80vh;
     width: 55vw;
     margin-inline:3rem ;
     @include tablet{
-        // transform: translateX(25%);
         width: 90vw;
+    }
+    @include belowTablet{
+        width: 90vw;
+        position: absolute;
+        margin-inline: 2rem;
     }
 }
 .full-size{
     height: 55vh;
     width: 90vw;
     margin-inline:4rem ;
+    @include belowTablet{
+        width: 90vw;
+        position: absolute;
+        margin-inline: 2rem;
+    }
+    @include mobile{
+        height: 50vh;
+    }
 
 }

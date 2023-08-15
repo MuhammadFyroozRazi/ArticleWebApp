@@ -24,7 +24,7 @@ const create = () => {
       setShowContentViewer(true)
     }
   }
-  console.log(showContentViewer);
+  // console.log(showContentViewer);
 
   useEffect(()=>{
     window.addEventListener('resize',handleResize)
