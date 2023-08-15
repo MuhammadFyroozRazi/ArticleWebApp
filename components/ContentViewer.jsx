@@ -9,19 +9,6 @@ const ContentViewer = ({text,edit,fontSz,title,windowWidth,showContentViewer}) =
   const [ankerElementArray,setAnkerElementArray] = useState([])
 
   
-  // useEffect(()=>{
-    
-  // })
-  
-  useEffect(() => {
-    const parser = new window.DOMParser();
-    const contentXML = parser.parseFromString(textDoc,'text/html')
-    const contentElements = contentXML.querySelectorAll('p')
-    setContentElementsArray([...contentElements])
-  }, []);
-  // const auther = useSelector(state=>state.articleSlice.auther)
-  // const article = useSelector(state=>state.articleSlice.article)
-  
 
   let textDoc =  text.replace(/<(b)>/g,`<span id='bold'>`)
                         .replace(/<(c)>/g,`<span id='code'>`)
@@ -98,9 +85,8 @@ const ContentViewer = ({text,edit,fontSz,title,windowWidth,showContentViewer}) =
     const ankerElement = headerXml.querySelectorAll('a');
     setAnkerElementArray([...ankerElement])
   }, [headersView]);
-  //  const headerXml = parser.parseFromString(headersView,'text/html')
-  //  const ankerElement = headerXml.querySelectorAll('a');
-  //  const ankerElementArray = [...ankerElement]
+  
+  
   
   
    const handleHeaderLinkClick = (e,targetid) =>{
