@@ -14,9 +14,14 @@ const create = () => {
   const [text,setText]=useState('')
   const [fontSz,setFontSz] = useState('12')
   const [title,setTitle] = useState('Article\'s Name')
-  const [windowWidth,setWindowWidth]=useState(window.innerWidth)
+  const [windowWidth,setWindowWidth]=useState(0)
   const [showContentViewer,setShowContentViewer] = useState(true)
   
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+  
+
   const handleResize = () =>{
     setWindowWidth(window.innerWidth)
     if (window.innerWidth > 
@@ -55,7 +60,7 @@ const create = () => {
         <button className="content-create-page__nav__btn edit-btn" 
           onClick={handleEditButton}
         >{edit === false ? 'edit' : 'done'}</button>
-            {window.innerWidth<1024 && !edit && <div className={`content-create-page__nav__toggler ${showContentViewer ? 'toggler-on' : 'toggler-off'}`}>
+            {windowWidth<1024 && !edit && <div className={`content-create-page__nav__toggler ${showContentViewer ? 'toggler-on' : 'toggler-off'}`}>
               {showContentViewer === true  ?  
                 <button className="content-create-page__nav__toggler-btn " onClick={()=>{setShowContentViewer(pre=>!pre)}}><BsArrowLeftSquare size={'1.5rem'} /></button> 
                 :
