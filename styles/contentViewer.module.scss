@@ -1,9 +1,12 @@
 @import './variable.module.scss';
 @import './font.scss';
-
+@import './mediaquery.scss';
 .content-container{
     display: flex;
     gap: 4rem;
+    // @include tablet {
+    //     gap: 6rem;
+    // }
 }
 .content-viewer {
     font-family: $font-family-inter;
@@ -19,20 +22,16 @@
     z-index: 1;
     position: relative;
     overflow-y: auto;
-    // padding-bottom: 2rem;
-    &__toggle{
-        position: absolute;
-        top: 20%;
-        right: -7.5px;
-        width: 15px;
-        height: 80px;
-        border-radius: 10px;
-        border: 2px solid white;
-        background-color:rgba(222, 222, 222, 0.595);
+    overflow-x: hidden;
+
+    transition: transform 0.5s ease-in-out;
+
+    @include tablet{
+        position: fixed;
     }
+
     &__header{
         margin-bottom: 1rem;
-
         &-h1{
             font-size: 1rem;
             margin-bottom: 1ch;
@@ -84,15 +83,16 @@
     }
 }
 .translate-to-view{
+    transform: translateX(0rem);
 }
 .translate-to-hide{
-    // transform: translateX();
+    transform: translateX(-20rem);
 }
 .article-viewer{
     margin-top: 5rem;
     // margin: auto auto;
     overflow-y: auto;
-    transition: height 0.3s ease-in-out;
+    transition: height 0.5s ease-in-out;
     
     p{
         margin-top: .3rem;
@@ -140,14 +140,21 @@
         //     text-align:end;
         // }
     }
+    // @include tablet{
+    //     width: 80vw;
+    // }
 
 }
-.full-size{
+.half-size{
     height: 80vh;
     width: 55vw;
     margin-inline:3rem ;
+    @include tablet{
+        // transform: translateX(25%);
+        width: 90vw;
+    }
 }
-.half-size{
+.full-size{
     height: 55vh;
     width: 90vw;
     margin-inline:4rem ;

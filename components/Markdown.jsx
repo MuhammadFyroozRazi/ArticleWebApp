@@ -14,8 +14,6 @@ const Markdown = ({edit,text,setText,fontSz,setFontSz,title,setTitle}) => {
   const [color,setColor] = useState('#ffffff')
   const [titleToggler,setTitleToggler] = useState(false)
 
-  console.log(title);
-
   const handleTitleToggler = () =>{
     setTitleToggler(prev=>!prev)
   }

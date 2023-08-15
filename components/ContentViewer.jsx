@@ -3,13 +3,12 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
 
-const ContentViewer = ({text,edit,fontSz,title}) => {
+const ContentViewer = ({text,edit,fontSz,title,windowWidth,showContentViewer}) => {
+  
   
   const parser = new DOMParser()
   const auther = useSelector(state=>state.articleSlice.auther)
   const article = useSelector(state=>state.articleSlice.article)
-
-  const [showContentViewer,setShowContentViewer] = useState(false)
   
 
   let textDoc =  text.replace(/<(b)>/g,`<span id='bold'>`)
@@ -96,11 +95,14 @@ const ContentViewer = ({text,edit,fontSz,title}) => {
       {/* {console.log(event.getAttribute('href').includes('h1'))} */}
     </a>
    ))
+
+  //  console.log(windowWidth < 1024 ? 'smaller' : 'biggher');
   
   return (
-    <div className={`content-container ${showContentViewer ? `translate-to-view` : 'translate-to-hide' } `}>
-     {!edit && <section className='content-viewer content-font'>
-          <button className="content-viewer__toggle" onClick={()=>{setShowContentViewer(pre=>!pre)}}></button>
+    <div className='content-container' >
+
+     {!edit  && <section className={`content-viewer ${showContentViewer ? `translate-to-view` : 'translate-to-hide' } content-font`}>
+
           <section className="content-viewer__header">
             <h1 className="content-viewer__header-h1 black-clr">{title ? title : 'Article\'s Name'}</h1>
             <p className="content-viewer__header-p p-small p-small-fade black-clr">creted date : dd/mm/yyy</p>
@@ -111,7 +113,7 @@ const ContentViewer = ({text,edit,fontSz,title}) => {
             {anchorComponet}
           {/* </div> */}
       </section>}
-      <section className={`article-viewer ${edit ? `half-size` : `full-size`}`}>
+      <section className={`article-viewer ${edit ? `full-size` : `half-size`}`}>
         {/* <div dangerouslySetInnerHTML={{ __html: contentComponent }} /> */}
         {contentComponent}
       </section>

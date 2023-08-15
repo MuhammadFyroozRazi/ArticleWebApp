@@ -1,7 +1,27 @@
+@keyframes translateAnimationPlusX {
+    0%{
+        transform: translateX(-20rem);
+    }
+    100%{
+        transform: translateX(0rem);
+    }
+}
+@keyframes translateAnimationMinusX {
+    0%{
+        transform: translateX(0rem);
+    }
+    100%{
+        transform: translateX(-20rem);
+    }
+}
+
+
 .content-create-page{
     // display: none;
     display: flex;
     width: 100vw;
+    overflow-y: hidden;
+    overflow-x: hidden;
 
     &__nav{
         position: fixed;
@@ -14,5 +34,25 @@
             width: 4rem;
             margin-left: 7rem;
         }
+        &__toggler{
+            opacity: 0.5;
+            position: fixed;
+            z-index: 3;
+            top: 0;
+            left: 20rem;
+            // transition: transform 0.5s ease-in-out;
+        }
+        .toggler{
+            &-on{
+                animation: translateAnimationPlusX 0.5s ease;
+                animation-fill-mode: forwards;
+            }
+            &-off{
+                animation: translateAnimationMinusX 0.8s ease;
+                animation-fill-mode: forwards;
+            }
+            
+        }
     }
+        
 }
