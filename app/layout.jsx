@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 
 import '../styles/global.scss'
 import { ReduxProvider } from '@redux/provider'
