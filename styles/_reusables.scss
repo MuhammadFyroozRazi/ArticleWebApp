@@ -1,0 +1,5 @@
+@mixin button ($background){
+    border: 1px solid $background;
+    width: 4rem;
+    margin-block:.5rem;
+}

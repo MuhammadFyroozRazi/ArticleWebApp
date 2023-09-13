@@ -1,0 +1,100 @@
+@import '../font';
+@import'../variable';
+
+.article{
+    font-family: $font-family-roboto ;
+    height: 100vh;
+    background:$bg-color;
+    display: flex;
+    &-nav{
+        border: 1px solid black;
+        // float: left;
+        height: 100%;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__img{
+            margin: 2rem 0rem 1rem 0;
+            height: 5rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            outline: $default-border;
+            // offset: ;
+            // border: $default-border;
+        }
+        p{
+            margin-bottom:1ch ;
+        }
+        &__userid{
+            opacity: 70%;
+            font-size: .7rem;
+        }
+    }
+    &-content{
+        height: 100%;
+        width: 70%;
+        margin-inline: 1rem;
+        &-header{
+            position: relative;
+            height: 30%;
+            .uprightelement{
+                // border: 1px solid black;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                top: .5rem;
+                right: .5rem;
+            }
+            padding-bottom: 1rem;
+            border-bottom: $default-border;
+        }
+        &__header{
+            position: absolute;
+            bottom: .5rem;
+            opacity: 50%;
+        }
+        &-box{
+            border: $default-border;
+            margin-block:2rem ;
+            width: 20rem;
+            font-size: .6rem;
+            padding-bottom: .2rem;
+            .content-box{
+                &-header{
+                    padding-inline: .4rem;
+                    padding-block: .2rem;
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: $default-border;
+                }
+                &-body{
+                    padding-inline: .4rem;
+                    padding-block: .4rem;
+                    border-bottom: $default-border;
+                }
+                &-footer{
+                    padding-inline: .4rem;
+                    padding-block: .2rem;
+                    display: flex;
+                    gap: .4rem;
+                    height: fit-content;
+                    max-height: 3rem;
+                    overflow-y: auto;
+                    flex-wrap: wrap;
+                }
+                &__title{
+                    font-size: 1rem;
+                    letter-spacing: .3ch;
+                }
+                &__btn{
+                    font-size: .6rem;
+                    height:1rem;
+                    padding: 0;
+                }
+                }
+                
+            }
+        }
+}

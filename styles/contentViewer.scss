@@ -1,6 +1,7 @@
-@import './variable.module.scss';
-@import './font.scss';
-@import './mediaquery.scss';
+@import '_variable';
+@import '_font';
+@import '_mediaquery';
+
 .content-container{
     display: flex;
     gap: 4rem;

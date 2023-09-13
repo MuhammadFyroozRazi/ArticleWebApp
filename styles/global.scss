@@ -1,7 +1,11 @@
-@import './variable.module.scss';
-@import './contentViewer.module.scss';
-@import './markdown.module.scss';
-@import './createpage.scss';
+@import '_variable';
+@import '_mediaquery';
+
+@import 'createpage';
+@import 'contentViewer';
+@import 'markdown';
+@import './articlehome/article';
+
 *{
     padding: 0;
     margin: 0;
@@ -59,4 +63,14 @@ h2,h3,h5,h6{
 }
 .content-create-page{
     display: flex;
+}
+.btn{
+    border: 1px solid $tr-green;
+    width: 5rem;
+    margin-block:.5rem;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    padding: .4rem;
+    // padding-inline: .2rem;
 }
